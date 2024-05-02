@@ -13,7 +13,7 @@ namespace mserinaExFinalC_
         public static string rutaLog;
 
         //citas
-        public static string citas = "C:\\Users\\csi23-mserina\\Desktop\\FICHEROS\\citas.txt";
+        public static string citas = "C:\\Users\\Usuario\\Desktop\\ARCHIVOS\\citas.txt";
 
         //lista
         public static List<pacientesDto> listaPacientes = new List<pacientesDto>();
@@ -31,10 +31,13 @@ namespace mserinaExFinalC_
 
             bool cerrarMenu = false;
             int opcionSeleccionada;
-
             MenuInterfaz mi = new MenuImplementacion();
-            OperacionesFicherosInterfaz op = new OperacionesFicherosImplementacion();
-            rutaLog = op.creacionFicheroLog();
+            OperacionesFicherosInterfaz opi = new OperacionesFicherosImplementacion();
+            OperacionInterfaz op = new OperacionImplementacion();
+            opi.citas();
+            rutaLog = opi.creacionFicheroLog();
+
+
             
             try
             {
@@ -56,6 +59,7 @@ namespace mserinaExFinalC_
                             using (StreamWriter sw = new StreamWriter(rutaLog, true))
                             {
                                 sw.WriteLine("Se abrio de registro llegada");
+                                op.registroDeLlegada();
                             }
                             break;
 
@@ -65,6 +69,9 @@ namespace mserinaExFinalC_
                                 sw.WriteLine("Se abrio listado de consultas");
                             }
                             mi.listadoConsultaImplementacion();
+                            break;
+                        case 3:
+                            op.verPacientes();
                             break;
 
                     }

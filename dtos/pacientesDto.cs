@@ -22,6 +22,7 @@
 
         public long Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
+        public string Dni { get => dni; set => dni = value; }
         public string Apellidos { get => apellidos; set => apellidos = value; }
         public string Especialidad { get => especialidad; set => especialidad = value; }
         public string FechaCita { get => fechaCita; set => fechaCita = value; }
@@ -30,9 +31,10 @@
 
         //constructores
 
-        public pacientesDto(long id, string nombre, string apellidos, string especialidad, string fechaCita, bool asistenciaACita)
+        public pacientesDto(long id, string dni, string nombre, string apellidos, string especialidad, string fechaCita, bool asistenciaACita)
         {
             this.id = id;
+            this.dni = dni;
             this.nombre = nombre;
             string[] apellidosSeparados = apellidos.Split(" ");
             string apellido1 = apellidosSeparados[0];
@@ -49,6 +51,16 @@
             
         }
 
+        //toSring
+        
+        override
+        public string ToString()
+        {
+            string texto =
+                id + ";" + dni + ";" +nombre + ";" + apellidos + ";" + especialidad + ";" + fechaCita + ";" +asistenciaACita;
+            return texto;
+            
+        }
         
     }
 }

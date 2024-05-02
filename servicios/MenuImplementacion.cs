@@ -25,6 +25,7 @@ namespace mserinaExFinalC_.servicios
                 Console.WriteLine("0[] CERRAR");
                 Console.WriteLine("1[] REGISTRO LLEGADA");
                 Console.WriteLine("2[] LISTADO DE CONSULTAS");
+                Console.WriteLine("3[] LISTADO DE CLIENTES");
                 Console.WriteLine(" ");
 
                 opcion = Convert.ToInt32(Console.ReadLine());

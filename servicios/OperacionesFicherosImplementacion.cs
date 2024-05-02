@@ -23,7 +23,7 @@ namespace mserinaExFinalC_.servicios
                 DateTime fechaActual = DateTime.Today;
                 string fechaString = fechaActual.ToString("ddMMyyyy");
                 string extensionArchivo = ".txt";
-                string rutaLogSinFecha = "C:\\Users\\csi23-mserina\\Desktop\\FICHEROS\\log-";
+                string rutaLogSinFecha = "C:\\Users\\Usuario\\Desktop\\ARCHIVOS\\log-";
                 rutaLog = string.Concat(rutaLogSinFecha, fechaString, extensionArchivo);
 
                 
@@ -44,18 +44,6 @@ namespace mserinaExFinalC_.servicios
         {
             pacientesDto paciente;
 
-            long idNuevo;
-            int tamano = Program.listaPacientes.Count;
-
-            if (tamano > 0)
-            {
-                idNuevo = Program.listaPacientes[tamano - 1].Id;
-            }
-            else
-            {
-                idNuevo = 1;
-            }
-
             try
             {
                 StreamReader sr = new StreamReader(Program.citas);
@@ -65,17 +53,18 @@ namespace mserinaExFinalC_.servicios
                 {
                     string[] campos = linea.Split(";");
 
-                    long id = idNuevo;
-                    string dni = campos[1];
-                    string nombre = campos[2];
-                    string apellidos = campos[3];
-                    string especialidad = campos[4];
-                    string fechaCita = campos[5];
-                    bool asistenciaACita = Convert.ToBoolean(campos[6]);
+                    long id = idGenerador();
+                    string dni = campos[0];
+                    string nombre = campos[1];
+                    string apellidos = campos[2];
+                    string especialidad = campos[3];
+                    string fechaCita = campos[4];
+                    bool asistenciaACita = Convert.ToBoolean(campos[5]);
 
                     paciente = new pacientesDto();
 
                     paciente.Id = id;
+                    paciente.Dni = dni;
                     paciente.Nombre = nombre;
                     paciente.Apellidos =  apellidos;
                     paciente.Especialidad = especialidad;
@@ -93,6 +82,23 @@ namespace mserinaExFinalC_.servicios
                     sw.WriteLine(ex.Message);
                 }
             }
+        }
+
+        public long idGenerador()
+        {
+            long idNuevo;
+            int tamano = Program.listaPacientes.Count;
+
+            if (tamano > 0)
+            {
+                idNuevo = Program.listaPacientes[tamano -1].Id + 1;
+            }
+            else
+            {
+                idNuevo = 1;
+            }
+
+            return idNuevo;
         }
     }
 }
